@@ -1,0 +1,262 @@
+// Prisma schema for Full Streamer System
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User/Streamer Model
+model Streamer {
+  id                String   @id @default(uuid())
+  discordId         String   @unique
+  username          String
+  email             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Profile
+  platforms         StreamerPlatform[]
+  applications      Application[]
+  tickets           Ticket[]
+  credits           CreditTransaction[]
+  schedule          StreamSchedule[]
+  achievements      Achievement[]
+  analytics         Analytics[]
+  rewards           RewardPurchase[]
+  
+  // Stats
+  totalCredits      Int      @default(0)
+  weeklyVideos      Int      @default(0)
+  weeklyStreamHours Float    @default(0)
+  totalVideos       Int      @default(0)
+  totalStreamHours  Float    @default(0)
+  
+  // Status
+  isActive          Boolean  @default(true)
+  status            String   @default("pending") // pending, approved, suspended
+  lastActive        DateTime @default(now())
+}
+
+// Platform Connection (YouTube, TikTok, Twitch, etc.)
+model StreamerPlatform {
+  id           String   @id @default(uuid())
+  streamerId   String
+  streamer     Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  platform     String   // youtube, tiktok, twitch, kick, instagram, facebook
+  platformId   String   // User ID on the platform
+  username     String
+  accessToken  String?  @db.Text
+  refreshToken String?  @db.Text
+  
+  // Requirements per platform
+  weeklyVideosRequired    Int    @default(0)
+  weeklyStreamHoursRequired Float @default(0)
+  
+  // Stats
+  followers    Int      @default(0)
+  totalViews   Int      @default(0)
+  
+  isConnected  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@unique([streamerId, platform])
+}
+
+// Application System
+model Application {
+  id          String   @id @default(uuid())
+  streamerId  String
+  streamer    Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  status      String   @default("pending") // pending, approved, rejected
+  
+  // Application Data
+  platforms   String[] // Array of platforms they want to stream on
+  experience  String   @db.Text
+  sampleLinks String[] // Links to their content
+  whyJoin     String   @db.Text
+  
+  reviewedBy  String?
+  reviewNotes String?  @db.Text
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Ticket System
+model Ticket {
+  id         String   @id @default(uuid())
+  streamerId String
+  streamer   Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  type       String   // application, issue, credit_request, promotion_request, support
+  title      String
+  description String  @db.Text
+  status     String   @default("open") // open, in_progress, closed
+  priority   String   @default("normal") // low, normal, high, urgent
+  
+  channelId  String?  // Discord channel ID for this ticket
+  messageId  String?  // Discord message ID
+  
+  assignedTo String?
+  messages   TicketMessage[]
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  closedAt   DateTime?
+}
+
+model TicketMessage {
+  id        String   @id @default(uuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  
+  userId    String   // Discord user ID
+  message   String   @db.Text
+  
+  createdAt DateTime @default(now())
+}
+
+// Credit System
+model CreditTransaction {
+  id          String   @id @default(uuid())
+  streamerId  String
+  streamer    Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  amount      Int      // Can be positive (earn) or negative (spend)
+  type        String   // video_upload, stream_start, weekly_goal, engagement, purchase, penalty, bonus, transfer
+  description String
+  
+  // For transfers
+  fromStreamerId String?
+  toStreamerId   String?
+  
+  // For purchases
+  rewardId    String?
+  
+  issuedBy    String?  // Discord user ID who issued (for manual adjustments)
+  
+  createdAt   DateTime @default(now())
+}
+
+// Rewards Store
+model Reward {
+  id          String   @id @default(uuid())
+  
+  nameEn      String
+  nameAr      String
+  descriptionEn String @db.Text
+  descriptionAr String @db.Text
+  
+  cost        Int      // Credit cost
+  category    String   // rank_upgrade, promotion, editing, gift_card, tools, coaching
+  
+  isAvailable Boolean  @default(true)
+  stock       Int?     // NULL for unlimited
+  
+  purchases   RewardPurchase[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model RewardPurchase {
+  id         String   @id @default(uuid())
+  streamerId String
+  streamer   Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  rewardId   String
+  reward     Reward   @relation(fields: [rewardId], references: [id])
+  
+  status     String   @default("pending") // pending, completed, cancelled
+  notes      String?  @db.Text
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Stream Schedule
+model StreamSchedule {
+  id         String   @id @default(uuid())
+  streamerId String
+  streamer   Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  dayOfWeek  Int      // 0-6 (Sunday-Saturday)
+  startTime  String   // HH:MM format
+  endTime    String   // HH:MM format
+  platform   String   // youtube, twitch, etc.
+  
+  isActive   Boolean  @default(true)
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Analytics
+model Analytics {
+  id          String   @id @default(uuid())
+  streamerId  String
+  streamer    Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  date        DateTime @default(now())
+  period      String   // daily, weekly, monthly
+  
+  // Metrics
+  videos      Int      @default(0)
+  streamHours Float    @default(0)
+  views       Int      @default(0)
+  engagement  Float    @default(0) // Engagement rate
+  followers   Int      @default(0)
+  
+  platform    String
+  
+  createdAt   DateTime @default(now())
+}
+
+// Achievements/Milestones
+model Achievement {
+  id          String   @id @default(uuid())
+  streamerId  String
+  streamer    Streamer @relation(fields: [streamerId], references: [id], onDelete: Cascade)
+  
+  type        String   // milestone_videos, milestone_hours, weekly_challenge, seasonal_reward
+  nameEn      String
+  nameAr      String
+  descriptionEn String
+  descriptionAr String
+  
+  reward      Int      // Credit reward
+  
+  unlockedAt  DateTime @default(now())
+}
+
+// Platform Rules
+model PlatformRule {
+  id                        String   @id @default(uuid())
+  
+  platform                  String   @unique // youtube, tiktok, twitch, kick, instagram, facebook
+  
+  weeklyVideosRequired      Int      @default(0)
+  weeklyStreamHoursRequired Float    @default(0)
+  
+  contentGuidelinesEn       String   @db.Text
+  contentGuidelinesAr       String   @db.Text
+  
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+}
+
+// System Settings
+model SystemSetting {
+  id        String   @id @default(uuid())
+  
+  key       String   @unique
+  value     String   @db.Text
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
