@@ -1,6 +1,28 @@
 # Deployment Guide
 
-## Bot Deployment
+This guide covers deploying both the **Discord Bot** and **Dashboard** as **separate, independent applications**.
+
+## 📦 Architecture Overview
+
+The system consists of TWO separate applications:
+
+1. **Discord Bot** (TypeScript + MongoDB)
+   - Handles all Discord interactions
+   - Manages database and business logic
+   - Exposes REST API for dashboard
+   - Deploy on: VPS, Cloud platforms, or Docker
+
+2. **Dashboard** (Next.js + React)
+   - Web interface for viewing statistics
+   - Completely independent frontend
+   - Connects to bot via API
+   - Deploy on: Vercel, Netlify, or any static hosting
+
+**They can be deployed separately and communicate via API.**
+
+---
+
+## 🤖 Bot Deployment
 
 ### Prerequisites
 1. Node.js 18+ installed
@@ -78,13 +100,36 @@ docker run -d --name streamer-bot --env-file .env streamer-bot
 - Configure environment variables
 - Deploy
 
-## Dashboard Deployment on Vercel
+## 📱 Dashboard Deployment (Separate Application)
 
-### Prerequisites
+The dashboard is a **completely independent Next.js application** that can be deployed separately from the bot.
+
+### Option 1: Vercel (Recommended) ⭐
+
+#### Prerequisites
 1. Vercel account (https://vercel.com)
-2. GitHub repository
+2. GitHub repository connected
 
-### Steps
+#### Method A: Vercel Dashboard (Easiest)
+
+1. **Go to Vercel Dashboard**
+   - Visit https://vercel.com/new
+   - Import your GitHub repository
+
+2. **Configure Project**
+   - **Root Directory**: Set to `dashboard`
+   - **Framework Preset**: Next.js
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `.next`
+
+3. **Add Environment Variables**
+   - `NEXT_PUBLIC_API_URL` - Your bot API URL (e.g., `https://your-bot-api.com`)
+   
+4. **Deploy**
+   - Click "Deploy"
+   - Wait for build to complete
+
+#### Method B: Vercel CLI
 
 1. **Install Vercel CLI**
    ```bash
@@ -112,10 +157,147 @@ docker run -d --name streamer-bot --env-file .env streamer-bot
    vercel --prod
    ```
 
-### Environment Variables on Vercel
-Add these in Vercel dashboard settings:
-- `NEXT_PUBLIC_API_URL` - Your bot API URL
-- Any other public environment variables
+### Option 2: Netlify
+
+1. **Connect Repository**
+   - Go to https://app.netlify.com
+   - Import your GitHub repository
+
+2. **Configure Build**
+   - **Base directory**: `dashboard`
+   - **Build command**: `npm run build`
+   - **Publish directory**: `dashboard/.next`
+
+3. **Environment Variables**
+   - Add `NEXT_PUBLIC_API_URL`
+
+4. **Deploy**
+
+### Option 3: Self-Hosted
+
+1. **Build Dashboard**
+   ```bash
+   cd dashboard
+   npm install
+   npm run build
+   ```
+
+2. **Start Production Server**
+   ```bash
+   npm start
+   ```
+
+3. **Use Process Manager**
+   ```bash
+   # PM2
+   pm2 start npm --name "dashboard" -- start
+   
+   # Or systemd service
+   ```
+
+4. **Configure Reverse Proxy (Nginx)**
+   ```nginx
+   server {
+       listen 80;
+       server_name dashboard.yourdomain.com;
+       
+       location / {
+           proxy_pass http://localhost:3000;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+       }
+   }
+   ```
+
+### Environment Variables for Dashboard
+
+Add these in your deployment platform:
+
+```env
+# Required
+NEXT_PUBLIC_API_URL=https://your-bot-api-url.com
+
+# Optional
+NEXT_PUBLIC_SITE_NAME=Streamer Dashboard
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+---
+
+## 🔗 Connecting Bot and Dashboard
+
+### Bot Configuration
+
+1. **Enable API Server** (in bot's `.env`):
+   ```env
+   API_PORT=3000
+   API_ENABLED=true
+   CORS_ORIGIN=https://your-dashboard-url.vercel.app
+   ```
+
+2. **Configure CORS**
+   The bot's Express server should allow requests from your dashboard domain.
+
+### Dashboard Configuration
+
+1. **Set API URL** (in dashboard's `.env.local` or deployment platform):
+   ```env
+   NEXT_PUBLIC_API_URL=https://your-bot-api.com
+   ```
+
+2. **Verify Connection**
+   - Dashboard should connect to bot's API
+   - Test by opening dashboard in browser
+   - Check browser console for connection errors
+
+---
+
+## 🧪 Testing Deployment
+
+### Bot
+```bash
+# Check if bot is running
+curl http://your-bot-api.com/health
+
+# Check API endpoints
+curl http://your-bot-api.com/api/stats
+```
+
+### Dashboard
+```bash
+# Visit dashboard URL
+https://your-dashboard.vercel.app
+
+# Check console for errors
+# Verify API connection
+```
+
+---
+
+## 🚀 Production Checklist
+
+### Bot
+- [ ] Environment variables configured
+- [ ] MongoDB connected
+- [ ] Discord bot token valid
+- [ ] API server running
+- [ ] CORS configured
+- [ ] Logs configured
+- [ ] Process manager (PM2/systemd)
+- [ ] Firewall rules
+- [ ] SSL certificate (if exposing API)
+
+### Dashboard
+- [ ] Deployed to hosting platform
+- [ ] Environment variables set
+- [ ] API URL configured
+- [ ] Build successful
+- [ ] Domain configured
+- [ ] SSL certificate active
+- [ ] CDN enabled (if available)
+- [ ] Performance optimized
+
+---
 
 ### Automatic Deployments
 - Connect GitHub repository to Vercel

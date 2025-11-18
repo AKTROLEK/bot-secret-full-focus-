@@ -1,6 +1,22 @@
 # Full Streamer Discord Bot System
 
-A comprehensive Discord bot system for managing streamers with an integrated dashboard, multi-platform support, credit system, analytics, and AI-powered features.
+A comprehensive Discord bot system for managing streamers with multi-platform support, credit system, analytics, and AI-powered features.
+
+> **📦 This repository contains TWO separate applications:**
+> 1. **Discord Bot** (TypeScript + MongoDB) - Main application
+> 2. **Dashboard** (Next.js + React) - Separate web interface
+>
+> Each can be deployed independently and configured to work together via API.
+>
+> 📖 **[Read the Structure Guide](STRUCTURE.md)** to understand how they work together.
+
+## Quick Links
+
+- 📖 [Structure Guide](STRUCTURE.md) - Understand the architecture
+- 🚀 [Deployment Guide](DEPLOYMENT.md) - Deploy bot and dashboard
+- 🎯 [Features Documentation](FEATURES.md) - Complete feature list
+- 📱 [Dashboard README](dashboard/README.md) - Dashboard-specific docs
+- ⚡ [Quick Start Guide](QUICKSTART.md) - Get started in 30 minutes
 
 ## Features
 
@@ -63,33 +79,30 @@ A comprehensive Discord bot system for managing streamers with an integrated das
 
 ## Installation
 
+> **Note**: The bot and dashboard are **separate applications** and can be installed/deployed independently.
+
 ### Prerequisites
 - Node.js 18.x or higher
-- MongoDB
+- MongoDB (for bot)
 - Discord Bot Token
 - API Keys (YouTube, Twitch, OpenAI, etc.)
 
-### Setup
+---
 
-1. Clone the repository:
+## 🤖 Bot Installation
+
+### 1. Clone the repository:
 ```bash
 git clone https://github.com/AKTROLEK/bot-secret-full-focus-.git
 cd bot-secret-full-focus-
 ```
 
-2. Install bot dependencies:
+### 2. Install bot dependencies:
 ```bash
 npm install
 ```
 
-3. Install dashboard dependencies:
-```bash
-cd dashboard
-npm install
-cd ..
-```
-
-4. Configure environment variables:
+### 3. Configure environment variables:
 ```bash
 cp .env.example .env
 ```
@@ -100,21 +113,57 @@ Edit `.env` with your configuration:
 - API keys
 - Role and channel IDs
 
-5. Build the bot:
+### 4. Build the bot:
 ```bash
 npm run build
 ```
 
-6. Start the bot:
+### 5. Start the bot:
 ```bash
 npm start
 ```
 
-7. Deploy the dashboard to Vercel:
+---
+
+## 📱 Dashboard Installation (Separate)
+
+The dashboard is a **completely independent Next.js application** located in the `/dashboard` directory.
+
+### 1. Navigate to dashboard directory:
 ```bash
 cd dashboard
+```
+
+### 2. Install dashboard dependencies:
+```bash
+npm install
+```
+
+### 3. Create dashboard environment file:
+```bash
+cp .env.local.example .env.local  # or create manually
+```
+
+Add your API endpoint:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+### 4. Run dashboard locally:
+```bash
+npm run dev
+```
+
+### 5. Deploy to Vercel:
+```bash
+# Install Vercel CLI if needed
+npm i -g vercel
+
+# Deploy
 vercel deploy
 ```
+
+Or use the [Vercel Dashboard](https://vercel.com) to deploy by connecting your GitHub repository and selecting the `/dashboard` directory as the root.
 
 ## Usage
 
