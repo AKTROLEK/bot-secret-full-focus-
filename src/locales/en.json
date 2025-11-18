@@ -1,0 +1,90 @@
+{
+  "commands": {
+    "apply": {
+      "name": "Apply as Streamer",
+      "description": "Submit application to become a streamer",
+      "success": "Your application has been submitted! A ticket has been created for review.",
+      "error": "Failed to submit application. Please try again."
+    },
+    "ticket": {
+      "name": "Create Ticket",
+      "description": "Create a support ticket",
+      "types": {
+        "application": "Application",
+        "issue": "Report Issue",
+        "credit_request": "Credit Request",
+        "promotion": "Promotion Request",
+        "support": "Technical Support"
+      }
+    },
+    "credits": {
+      "name": "Credits",
+      "description": "View your credit balance",
+      "balance": "Your credit balance: **{amount}** credits",
+      "add": "Added {amount} credits to {user}",
+      "remove": "Removed {amount} credits from {user}",
+      "transfer": "Successfully transferred {amount} credits to {user}",
+      "insufficient": "Insufficient credits"
+    },
+    "schedule": {
+      "name": "Schedule",
+      "description": "Manage your streaming schedule",
+      "set": "Schedule set successfully!",
+      "view": "Your streaming schedule:",
+      "reminder": "Reminder: You have a stream scheduled in 1 hour on {platform}!"
+    },
+    "stats": {
+      "name": "Statistics",
+      "description": "View your streaming statistics",
+      "weekly": "Weekly Statistics",
+      "monthly": "Monthly Statistics",
+      "total": "Total Statistics"
+    },
+    "rewards": {
+      "name": "Rewards",
+      "description": "Browse and redeem rewards",
+      "catalog": "Rewards Catalog",
+      "redeem": "Reward redeemed successfully!",
+      "cost": "Cost: {amount} credits"
+    },
+    "leaderboard": {
+      "name": "Leaderboard",
+      "description": "View top streamers",
+      "title": "Top Streamers This Week"
+    },
+    "rules": {
+      "name": "Platform Rules",
+      "description": "View platform streaming requirements"
+    },
+    "language": {
+      "name": "Language",
+      "description": "Change language preference",
+      "changed": "Language changed to English"
+    }
+  },
+  "notifications": {
+    "stream_start": "{user} has started streaming on {platform}!",
+    "stream_end": "{user} has ended their stream on {platform}",
+    "video_published": "{user} published a new video on {platform}: {title}",
+    "milestone": "Congratulations {user}! You've reached {milestone}!",
+    "violation": "Warning: You have not met the streaming requirements for {platform}",
+    "challenge": "New challenge available: {title}",
+    "reminder": "Reminder: Your scheduled stream starts in {time}"
+  },
+  "errors": {
+    "no_permission": "You don't have permission to use this command",
+    "not_streamer": "This command is only available to streamers",
+    "invalid_platform": "Invalid platform specified",
+    "database_error": "Database error occurred",
+    "api_error": "API request failed"
+  },
+  "general": {
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "success": "Success!",
+    "error": "Error"
+  }
+}
