@@ -12,12 +12,15 @@ import logger from './utils/logger';
 import { TicketService } from './services/TicketService';
 import { AnalyticsService } from './services/AnalyticsService';
 import { CreditService } from './services/CreditService';
+import { NotificationService } from './services/NotificationService';
+import { initializeDefaultData } from './services/SetupService';
 
 // Extend Client type to include commands
 declare module 'discord.js' {
   export interface Client {
     commands: Collection<string, any>;
     ticketService: TicketService;
+    notificationService: NotificationService;
   }
 }
 
@@ -33,6 +36,7 @@ const client = new Client({
 
 client.commands = new Collection();
 client.ticketService = new TicketService(client);
+client.notificationService = new NotificationService(client);
 
 // Load commands
 const loadCommands = () => {
@@ -141,12 +145,21 @@ const setupCronJobs = () => {
     await AnalyticsService.resetMonthlyStats();
   });
 
+  // Check streaming requirements every Sunday at 20:00
+  cron.schedule('0 20 * * 0', async () => {
+    logger.info('Checking streaming requirements');
+    await client.notificationService.checkStreamingRequirements();
+  });
+
   logger.info('Cron jobs scheduled');
 };
 
 // Event handlers
 client.once('ready', async () => {
   logger.info(`Logged in as ${client.user?.tag}`);
+
+  // Initialize default data
+  await initializeDefaultData();
 
   const commands = loadCommands();
   await registerCommands(commands);
