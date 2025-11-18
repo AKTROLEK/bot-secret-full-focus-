@@ -1,0 +1,72 @@
+{
+  "dashboard": {
+    "title": "Streamer Dashboard",
+    "titleAr": "لوحة تحكم الستريمر"
+  },
+  "navigation": {
+    "home": "Home",
+    "homeAr": "الرئيسية",
+    "statistics": "Statistics",
+    "statisticsAr": "الإحصائيات",
+    "credits": "Credits",
+    "creditsAr": "الكريدت",
+    "rewards": "Rewards",
+    "rewardsAr": "المكافآت",
+    "schedule": "Schedule",
+    "scheduleAr": "الجدول",
+    "leaderboard": "Leaderboard",
+    "leaderboardAr": "المتصدرين"
+  },
+  "stats": {
+    "totalVideos": "Total Videos",
+    "totalVideosAr": "إجمالي المقاطع",
+    "streamHours": "Stream Hours",
+    "streamHoursAr": "ساعات البث",
+    "totalViews": "Total Views",
+    "totalViewsAr": "إجمالي المشاهدات",
+    "credits": "Credits",
+    "creditsAr": "الكريدت",
+    "weeklyVideos": "Weekly Videos",
+    "weeklyVideosAr": "المقاطع الأسبوعية",
+    "monthlyVideos": "Monthly Videos",
+    "monthlyVideosAr": "المقاطع الشهرية"
+  },
+  "wallet": {
+    "title": "Credit Wallet",
+    "titleAr": "محفظة الكريدت",
+    "balance": "Available Balance",
+    "balanceAr": "الرصيد المتاح",
+    "transfer": "Transfer Credits",
+    "transferAr": "تحويل الكريدت",
+    "redeem": "Redeem Rewards",
+    "redeemAr": "استبدال المكافآت",
+    "history": "Transaction History",
+    "historyAr": "سجل المعاملات"
+  },
+  "leaderboard": {
+    "title": "Top Streamers",
+    "titleAr": "أفضل الستريمرز",
+    "rank": "Rank",
+    "rankAr": "الترتيب",
+    "username": "Username",
+    "usernameAr": "اسم المستخدم",
+    "videos": "Videos",
+    "videosAr": "المقاطع",
+    "hours": "Hours",
+    "hoursAr": "الساعات"
+  },
+  "common": {
+    "loading": "Loading...",
+    "loadingAr": "جارٍ التحميل...",
+    "error": "Error",
+    "errorAr": "خطأ",
+    "success": "Success",
+    "successAr": "نجح",
+    "cancel": "Cancel",
+    "cancelAr": "إلغاء",
+    "confirm": "Confirm",
+    "confirmAr": "تأكيد",
+    "save": "Save",
+    "saveAr": "حفظ"
+  }
+}

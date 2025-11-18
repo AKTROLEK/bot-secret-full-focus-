@@ -1,0 +1,90 @@
+{
+  "commands": {
+    "apply": {
+      "name": "التقديم كستريمر",
+      "description": "تقديم طلب للانضمام كستريمر",
+      "success": "تم تقديم طلبك! تم إنشاء تذكرة للمراجعة.",
+      "error": "فشل تقديم الطلب. يرجى المحاولة مرة أخرى."
+    },
+    "ticket": {
+      "name": "إنشاء تذكرة",
+      "description": "إنشاء تذكرة دعم",
+      "types": {
+        "application": "طلب انضمام",
+        "issue": "الإبلاغ عن مشكلة",
+        "credit_request": "طلب كريدت",
+        "promotion": "طلب ترويج",
+        "support": "دعم فني"
+      }
+    },
+    "credits": {
+      "name": "الكريدت",
+      "description": "عرض رصيد الكريدت الخاص بك",
+      "balance": "رصيد الكريدت الخاص بك: **{amount}** كريدت",
+      "add": "تمت إضافة {amount} كريدت لـ {user}",
+      "remove": "تم خصم {amount} كريدت من {user}",
+      "transfer": "تم تحويل {amount} كريدت بنجاح إلى {user}",
+      "insufficient": "رصيد كريدت غير كافٍ"
+    },
+    "schedule": {
+      "name": "الجدول الزمني",
+      "description": "إدارة جدول البث الخاص بك",
+      "set": "تم تعيين الجدول الزمني بنجاح!",
+      "view": "جدول البث الخاص بك:",
+      "reminder": "تذكير: لديك بث مجدول خلال ساعة واحدة على {platform}!"
+    },
+    "stats": {
+      "name": "الإحصائيات",
+      "description": "عرض إحصائيات البث الخاصة بك",
+      "weekly": "الإحصائيات الأسبوعية",
+      "monthly": "الإحصائيات الشهرية",
+      "total": "الإحصائيات الكلية"
+    },
+    "rewards": {
+      "name": "المكافآت",
+      "description": "تصفح واستبدال المكافآت",
+      "catalog": "كتالوج المكافآت",
+      "redeem": "تم استبدال المكافأة بنجاح!",
+      "cost": "التكلفة: {amount} كريدت"
+    },
+    "leaderboard": {
+      "name": "لوحة المتصدرين",
+      "description": "عرض أفضل الستريمرز",
+      "title": "أفضل الستريمرز هذا الأسبوع"
+    },
+    "rules": {
+      "name": "قوانين المنصات",
+      "description": "عرض متطلبات البث لكل منصة"
+    },
+    "language": {
+      "name": "اللغة",
+      "description": "تغيير تفضيل اللغة",
+      "changed": "تم تغيير اللغة إلى العربية"
+    }
+  },
+  "notifications": {
+    "stream_start": "{user} بدأ البث المباشر على {platform}!",
+    "stream_end": "{user} أنهى البث المباشر على {platform}",
+    "video_published": "{user} نشر فيديو جديد على {platform}: {title}",
+    "milestone": "مبروك {user}! لقد وصلت إلى {milestone}!",
+    "violation": "تحذير: لم تحقق متطلبات البث لـ {platform}",
+    "challenge": "تحدي جديد متاح: {title}",
+    "reminder": "تذكير: البث المجدول الخاص بك يبدأ في {time}"
+  },
+  "errors": {
+    "no_permission": "ليس لديك صلاحية لاستخدام هذا الأمر",
+    "not_streamer": "هذا الأمر متاح فقط للستريمرز",
+    "invalid_platform": "منصة غير صالحة",
+    "database_error": "حدث خطأ في قاعدة البيانات",
+    "api_error": "فشل طلب API"
+  },
+  "general": {
+    "yes": "نعم",
+    "no": "لا",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "loading": "جارٍ التحميل...",
+    "success": "نجح!",
+    "error": "خطأ"
+  }
+}
