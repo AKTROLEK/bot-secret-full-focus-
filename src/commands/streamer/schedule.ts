@@ -6,21 +6,15 @@ import { isStreamer } from '../../utils/permissions';
 export default {
   data: new SlashCommandBuilder()
     .setName('schedule')
-    .setNameLocalizations({ ar: 'الجدول' })
     .setDescription('Manage your streaming schedule')
-    .setDescriptionLocalizations({ ar: 'إدارة جدول البث الخاص بك' })
     .addSubcommand(subcommand =>
       subcommand
         .setName('add')
-        .setNameLocalizations({ ar: 'إضافة' })
         .setDescription('Add a scheduled stream')
-        .setDescriptionLocalizations({ ar: 'إضافة بث مجدول' })
         .addStringOption(option =>
           option
             .setName('day')
-            .setNameLocalizations({ ar: 'اليوم' })
             .setDescription('Day of the week')
-            .setDescriptionLocalizations({ ar: 'يوم من الأسبوع' })
             .setRequired(true)
             .addChoices(
               { name: 'Monday', value: 'monday' },
@@ -35,25 +29,19 @@ export default {
         .addStringOption(option =>
           option
             .setName('start_time')
-            .setNameLocalizations({ ar: 'وقت_البدء' })
             .setDescription('Start time (HH:MM format)')
-            .setDescriptionLocalizations({ ar: 'وقت البدء (صيغة HH:MM)' })
             .setRequired(true)
         )
         .addStringOption(option =>
           option
             .setName('end_time')
-            .setNameLocalizations({ ar: 'وقت_الانتهاء' })
             .setDescription('End time (HH:MM format)')
-            .setDescriptionLocalizations({ ar: 'وقت الانتهاء (صيغة HH:MM)' })
             .setRequired(true)
         )
         .addStringOption(option =>
           option
             .setName('platform')
-            .setNameLocalizations({ ar: 'المنصة' })
             .setDescription('Streaming platform')
-            .setDescriptionLocalizations({ ar: 'منصة البث' })
             .setRequired(true)
             .addChoices(
               { name: 'YouTube', value: 'youtube' },
@@ -68,16 +56,12 @@ export default {
     .addSubcommand(subcommand =>
       subcommand
         .setName('view')
-        .setNameLocalizations({ ar: 'عرض' })
         .setDescription('View your schedule')
-        .setDescriptionLocalizations({ ar: 'عرض جدولك' })
     )
     .addSubcommand(subcommand =>
       subcommand
         .setName('clear')
-        .setNameLocalizations({ ar: 'حذف' })
         .setDescription('Clear your schedule')
-        .setDescriptionLocalizations({ ar: 'حذف جدولك' })
     ),
 
   async execute(interaction: CommandInteraction) {

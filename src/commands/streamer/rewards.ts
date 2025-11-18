@@ -7,21 +7,15 @@ import { isStreamer } from '../../utils/permissions';
 export default {
   data: new SlashCommandBuilder()
     .setName('rewards')
-    .setNameLocalizations({ ar: 'المكافآت' })
     .setDescription('Browse and redeem rewards')
-    .setDescriptionLocalizations({ ar: 'تصفح واستبدال المكافآت' })
     .addSubcommand(subcommand =>
       subcommand
         .setName('catalog')
-        .setNameLocalizations({ ar: 'الكتالوج' })
         .setDescription('View available rewards')
-        .setDescriptionLocalizations({ ar: 'عرض المكافآت المتاحة' })
         .addStringOption(option =>
           option
             .setName('category')
-            .setNameLocalizations({ ar: 'الفئة' })
             .setDescription('Filter by category')
-            .setDescriptionLocalizations({ ar: 'تصفية حسب الفئة' })
             .addChoices(
               { name: 'Rank Upgrades', value: 'rank' },
               { name: 'Promotion', value: 'promotion' },
@@ -35,15 +29,11 @@ export default {
     .addSubcommand(subcommand =>
       subcommand
         .setName('redeem')
-        .setNameLocalizations({ ar: 'استبدال' })
         .setDescription('Redeem a reward')
-        .setDescriptionLocalizations({ ar: 'استبدال مكافأة' })
         .addStringOption(option =>
           option
             .setName('reward_id')
-            .setNameLocalizations({ ar: 'معرف_المكافأة' })
             .setDescription('Reward ID to redeem')
-            .setDescriptionLocalizations({ ar: 'معرف المكافأة للاستبدال' })
             .setRequired(true)
         )
     ),

@@ -6,36 +6,26 @@ import { isStreamer } from '../../utils/permissions';
 export default {
   data: new SlashCommandBuilder()
     .setName('credits')
-    .setNameLocalizations({ ar: 'الكريدت' })
     .setDescription('Manage your credits')
-    .setDescriptionLocalizations({ ar: 'إدارة الكريدت الخاص بك' })
     .addSubcommand(subcommand =>
       subcommand
         .setName('balance')
-        .setNameLocalizations({ ar: 'الرصيد' })
         .setDescription('Check your credit balance')
-        .setDescriptionLocalizations({ ar: 'التحقق من رصيد الكريدت' })
     )
     .addSubcommand(subcommand =>
       subcommand
         .setName('transfer')
-        .setNameLocalizations({ ar: 'تحويل' })
         .setDescription('Transfer credits to another user')
-        .setDescriptionLocalizations({ ar: 'تحويل الكريدت إلى مستخدم آخر' })
         .addUserOption(option =>
           option
             .setName('user')
-            .setNameLocalizations({ ar: 'المستخدم' })
             .setDescription('User to transfer credits to')
-            .setDescriptionLocalizations({ ar: 'المستخدم المراد التحويل إليه' })
             .setRequired(true)
         )
         .addIntegerOption(option =>
           option
             .setName('amount')
-            .setNameLocalizations({ ar: 'الكمية' })
             .setDescription('Amount of credits to transfer')
-            .setDescriptionLocalizations({ ar: 'كمية الكريدت المراد تحويلها' })
             .setRequired(true)
             .setMinValue(1)
         )
@@ -43,9 +33,7 @@ export default {
     .addSubcommand(subcommand =>
       subcommand
         .setName('history')
-        .setNameLocalizations({ ar: 'السجل' })
         .setDescription('View your transaction history')
-        .setDescriptionLocalizations({ ar: 'عرض سجل المعاملات' })
     ),
 
   async execute(interaction: CommandInteraction) {

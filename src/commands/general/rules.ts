@@ -5,15 +5,11 @@ import { t } from '../../utils/i18n';
 export default {
   data: new SlashCommandBuilder()
     .setName('rules')
-    .setNameLocalizations({ ar: 'القوانين' })
     .setDescription('View platform streaming requirements')
-    .setDescriptionLocalizations({ ar: 'عرض متطلبات البث لكل منصة' })
     .addStringOption(option =>
       option
         .setName('platform')
-        .setNameLocalizations({ ar: 'المنصة' })
         .setDescription('Platform to view rules for')
-        .setDescriptionLocalizations({ ar: 'المنصة لعرض قوانينها' })
         .addChoices(
           { name: 'YouTube', value: 'youtube' },
           { name: 'Twitch', value: 'twitch' },

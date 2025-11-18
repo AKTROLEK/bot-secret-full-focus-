@@ -4,15 +4,11 @@ import { setLanguage, t } from '../../utils/i18n';
 export default {
   data: new SlashCommandBuilder()
     .setName('language')
-    .setNameLocalizations({ ar: 'اللغة' })
     .setDescription('Change language preference')
-    .setDescriptionLocalizations({ ar: 'تغيير تفضيل اللغة' })
     .addStringOption(option =>
       option
         .setName('lang')
-        .setNameLocalizations({ ar: 'اللغة' })
         .setDescription('Language to switch to')
-        .setDescriptionLocalizations({ ar: 'اللغة المراد التبديل إليها' })
         .setRequired(true)
         .addChoices(
           { name: 'English', value: 'en' },

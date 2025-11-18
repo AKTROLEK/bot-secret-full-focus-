@@ -6,29 +6,21 @@ import { isStreamer } from '../../utils/permissions';
 export default {
   data: new SlashCommandBuilder()
     .setName('stats')
-    .setNameLocalizations({ ar: 'الإحصائيات' })
     .setDescription('View your streaming statistics')
-    .setDescriptionLocalizations({ ar: 'عرض إحصائيات البث الخاصة بك' })
     .addSubcommand(subcommand =>
       subcommand
         .setName('weekly')
-        .setNameLocalizations({ ar: 'أسبوعي' })
         .setDescription('View weekly statistics')
-        .setDescriptionLocalizations({ ar: 'عرض الإحصائيات الأسبوعية' })
     )
     .addSubcommand(subcommand =>
       subcommand
         .setName('monthly')
-        .setNameLocalizations({ ar: 'شهري' })
         .setDescription('View monthly statistics')
-        .setDescriptionLocalizations({ ar: 'عرض الإحصائيات الشهرية' })
     )
     .addSubcommand(subcommand =>
       subcommand
         .setName('total')
-        .setNameLocalizations({ ar: 'إجمالي' })
         .setDescription('View total statistics')
-        .setDescriptionLocalizations({ ar: 'عرض الإحصائيات الإجمالية' })
     ),
 
   async execute(interaction: CommandInteraction) {

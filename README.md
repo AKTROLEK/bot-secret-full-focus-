@@ -46,6 +46,7 @@ A comprehensive Discord bot system for managing streamers with an integrated das
 ### 🌍 Multi-Language Support
 - English
 - Arabic (العربية)
+  - **Note**: Discord does not support Arabic locale for slash command names and descriptions. Command names and descriptions will appear in English, but all bot responses, messages, and the dashboard UI support full Arabic translation. Use the `/language` command to switch between languages.
 
 ### 🎁 Rewards System
 - Credit-based rewards store

@@ -5,15 +5,11 @@ import { t } from '../../utils/i18n';
 export default {
   data: new SlashCommandBuilder()
     .setName('leaderboard')
-    .setNameLocalizations({ ar: 'المتصدرين' })
     .setDescription('View top streamers')
-    .setDescriptionLocalizations({ ar: 'عرض أفضل الستريمرز' })
     .addStringOption(option =>
       option
         .setName('period')
-        .setNameLocalizations({ ar: 'الفترة' })
         .setDescription('Time period')
-        .setDescriptionLocalizations({ ar: 'الفترة الزمنية' })
         .addChoices(
           { name: 'Weekly', value: 'week' },
           { name: 'Monthly', value: 'month' }

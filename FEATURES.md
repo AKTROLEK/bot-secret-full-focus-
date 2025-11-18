@@ -231,14 +231,24 @@ This document provides detailed information about all features implemented in th
 - 🇸🇦 Arabic (العربية)
 
 ### Features:
-- All commands in both languages
-- Slash command name localization
-- Dashboard bilingual
+- Bot responses and messages in both languages
+- Dashboard bilingual interface
 - Notification translations
 - RTL support for Arabic
+- i18next integration for translations
+
+### Important Note:
+**Discord Limitation**: Discord.js does not support Arabic (`ar`) as a valid locale for slash command name/description localizations. Only specific locales like `en-US`, `en-GB`, `fr`, `de`, etc. are supported by Discord.
+
+**What this means**:
+- ✅ Command names and descriptions appear in English for all users
+- ✅ All bot responses, messages, and embeds support full Arabic translation
+- ✅ Dashboard UI is fully bilingual (EN/AR)
+- ✅ Internal i18n system supports Arabic
+- ✅ Users can switch language preference with `/language` command
 
 ### Commands:
-- `/language lang:ar` - Switch to Arabic
+- `/language lang:ar` - Switch to Arabic (changes bot responses to Arabic)
 - `/language lang:en` - Switch to English
 
 ---

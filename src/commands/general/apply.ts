@@ -5,19 +5,11 @@ import { t } from '../../utils/i18n';
 export default {
   data: new SlashCommandBuilder()
     .setName('apply')
-    .setNameLocalizations({
-      ar: 'تقديم',
-    })
     .setDescription('Submit application to become a streamer')
-    .setDescriptionLocalizations({
-      ar: 'تقديم طلب للانضمام كستريمر',
-    })
     .addStringOption(option =>
       option
         .setName('platform')
-        .setNameLocalizations({ ar: 'المنصة' })
         .setDescription('Your primary streaming platform')
-        .setDescriptionLocalizations({ ar: 'منصة البث الأساسية الخاصة بك' })
         .setRequired(true)
         .addChoices(
           { name: 'YouTube', value: 'youtube' },
@@ -31,17 +23,13 @@ export default {
     .addStringOption(option =>
       option
         .setName('channel')
-        .setNameLocalizations({ ar: 'القناة' })
         .setDescription('Your channel/username on the platform')
-        .setDescriptionLocalizations({ ar: 'اسم قناتك/حسابك على المنصة' })
         .setRequired(true)
     )
     .addStringOption(option =>
       option
         .setName('experience')
-        .setNameLocalizations({ ar: 'الخبرة' })
         .setDescription('Brief description of your streaming experience')
-        .setDescriptionLocalizations({ ar: 'وصف مختصر لخبرتك في البث' })
         .setRequired(true)
     ),
 
